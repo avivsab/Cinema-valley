@@ -1,13 +1,11 @@
 const mysql = require('mysql2/promise');
 const express = require('express');
-const bodyParser = require('body-parser')
 const router = express.Router();
-router.use(bodyParser.json());
 
 let pool;
 
 (async function initializePool() {
-    const pool = mysql.createPool({
+     pool = mysql.createPool({
         host: 'localhost',
         user: 'root',
         password: '12345678',
@@ -26,24 +24,25 @@ router.get('/', async (req,res) => {
 
 router.get('/movie_list', async (req,res) => {
  
-    const [results, fields] = await pool.execute('select title from Movies');
+    const [results] = await pool.execute('select title from Movies');
     res.send(results);
 });
 
 router.get('/:id', async (req,res) => {
  
-      const movieId = req.params.id;
-    const [results, fields] = await pool.execute(`select title from Movies where id = ${movieId}`);
+    //   const movieId = req.params.id;
+         const id = req.params.id
+    const [results] = await pool.execute(`select title from Movies where id = ${id}`);
     res.send(results);
 });
-router.use(express.urlencoded());
-router.use(express.json());
+
 router.post('/', async (req,res) => {
     
-    const newMovie = req.body;  
-    // const [results, fields] = await connection.execute(`INSERT INTO Movies (title) VALUES ('${newMovie}')`);
-    console.log(newMovie);  
-    console.log(req)
+    const {title} = req.body;  
+    const [results] = await pool.execute(`INSERT INTO Movies (title) VALUES ('${title}')`);
+    console.log(results);  
+    res.send('Hi!');
+    // console.log(req)
 });
 
 router.delete('/:id', async (req,res) => {
