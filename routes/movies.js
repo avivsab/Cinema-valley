@@ -18,29 +18,24 @@ let pool;
     });
 })();
 router.get('/', async (req,res) => {
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '12345678',
-        database: 'cinemaville'
-      });
+
    const [results, fields] = await pool.execute('select * from Movies');
    res.send(results);
    
-
+});
 
 router.get('/movie_list', async (req,res) => {
  
     const [results, fields] = await pool.execute('select title from Movies');
     res.send(results);
-})
+});
 
 router.get('/:id', async (req,res) => {
  
       const movieId = req.params.id;
     const [results, fields] = await pool.execute(`select title from Movies where id = ${movieId}`);
     res.send(results);
-})
+});
 router.use(express.urlencoded());
 router.use(express.json());
 router.post('/', async (req,res) => {
@@ -57,14 +52,14 @@ router.delete('/:id', async (req,res) => {
     const [results, fields] = await pool.execute(`DELETE FROM Movies WHERE id = ${delMovie}`);
     console.log(delMovie);
     res.send(results)
-})
+});
 router.delete('/:id', async (req,res) => {
  
     const delMovie = req.params.id;  
     const [results, fields] = await pool.execute(`DELETE FROM Movies WHERE id = ${delMovie}`);
     console.log(delMovie);
     res.send(results)
-})
+});
 
 router.put('/:id', async (req,res) => {
     
@@ -73,9 +68,9 @@ router.put('/:id', async (req,res) => {
     const [results, fields] = await pool.execute(`UPDATE Movies SET title = ${updateMovieTitle} WHERE id = ${updateMovieId}`);
     console.log(delMovie);
     res.send(results)
-})
+});
 
 
 
-})
+
 module.exports = router;
