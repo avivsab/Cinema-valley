@@ -4,6 +4,19 @@ const bodyParser = require('body-parser')
 const router = express.Router();
 router.use(bodyParser.json());
 
+let pool;
+
+(async function initializePool() {
+    const pool = mysql.createPool({
+        host: 'localhost',
+        user: 'root',
+        password: '12345678',
+        database: 'cinemaville',
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0
+    });
+})();
 router.get('/', async (req,res) => {
     const connection = await mysql.createConnection({
         host: 'localhost',
@@ -11,21 +24,21 @@ router.get('/', async (req,res) => {
         password: '12345678',
         database: 'cinemaville'
       });
-   const [results, fields] = await connection.execute('select * from Movies');
+   const [results, fields] = await pool.execute('select * from Movies');
    res.send(results);
    
 
 
 router.get('/movie_list', async (req,res) => {
  
-    const [results, fields] = await connection.execute('select title from Movies');
+    const [results, fields] = await pool.execute('select title from Movies');
     res.send(results);
 })
 
 router.get('/:id', async (req,res) => {
  
       const movieId = req.params.id;
-    const [results, fields] = await connection.execute(`select title from Movies where id = ${movieId}`);
+    const [results, fields] = await pool.execute(`select title from Movies where id = ${movieId}`);
     res.send(results);
 })
 router.use(express.urlencoded());
@@ -41,14 +54,14 @@ router.post('/', async (req,res) => {
 router.delete('/:id', async (req,res) => {
  
     const delMovie = req.params.id;  
-    const [results, fields] = await connection.execute(`DELETE FROM Movies WHERE id = ${delMovie}`);
+    const [results, fields] = await pool.execute(`DELETE FROM Movies WHERE id = ${delMovie}`);
     console.log(delMovie);
     res.send(results)
 })
 router.delete('/:id', async (req,res) => {
  
     const delMovie = req.params.id;  
-    const [results, fields] = await connection.execute(`DELETE FROM Movies WHERE id = ${delMovie}`);
+    const [results, fields] = await pool.execute(`DELETE FROM Movies WHERE id = ${delMovie}`);
     console.log(delMovie);
     res.send(results)
 })
@@ -57,7 +70,7 @@ router.put('/:id', async (req,res) => {
     
     const updateMovieId = req.params.id;
     const updateMovieTitle = req.params.body;  
-    const [results, fields] = await connection.execute(`UPDATE Movies SET title = ${updateMovieTitle} WHERE id = ${updateMovieId}`);
+    const [results, fields] = await pool.execute(`UPDATE Movies SET title = ${updateMovieTitle} WHERE id = ${updateMovieId}`);
     console.log(delMovie);
     res.send(results)
 })
