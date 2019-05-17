@@ -39,7 +39,7 @@ router.get('/:id', async (req,res) => {
 router.post('/', async (req,res) => {
     
     const {title} = req.body;  
-    const [results] = await pool.execute(`INSERT INTO Movies (title) VALUES ('${title}')`);
+    const [results] = await pool.execute(`INSERT INTO Movies (title) VALUES (?)`, [title]);
     console.log(results);  
     res.send('Hi!');
     // console.log(req)
@@ -48,14 +48,7 @@ router.post('/', async (req,res) => {
 router.delete('/:id', async (req,res) => {
  
     const delMovie = req.params.id;  
-    const [results, fields] = await pool.execute(`DELETE FROM Movies WHERE id = ${delMovie}`);
-    console.log(delMovie);
-    res.send(results)
-});
-router.delete('/:id', async (req,res) => {
- 
-    const delMovie = req.params.id;  
-    const [results, fields] = await pool.execute(`DELETE FROM Movies WHERE id = ${delMovie}`);
+    const [results] = await pool.execute(`DELETE FROM Movies WHERE id = ?`, [delMovie]);
     console.log(delMovie);
     res.send(results)
 });
@@ -64,7 +57,7 @@ router.put('/:id', async (req,res) => {
     
     const updateMovieId = req.params.id;
     const updateMovieTitle = req.params.body;  
-    const [results, fields] = await pool.execute(`UPDATE Movies SET title = ${updateMovieTitle} WHERE id = ${updateMovieId}`);
+    const [results] = await pool.execute(`UPDATE Movies SET title = ? WHERE id = ?` [updateMovieTitle, updateMovieId]);
     console.log(delMovie);
     res.send(results)
 });
