@@ -9,7 +9,7 @@ var moviesRouter = require('./routes/movies');
 
 var app = express();
 
-const noPageMidmiddleware = (path) => {
+const noPageMiddleware = (path) => {
     return (req, res, next) => {
         res.sendFile(path);
     }
@@ -24,6 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
-app.use(noPageMidmiddleware(path.join(__dirname, 'public', '404.html')));
+app.use(noPageMiddleware(path.join(__dirname, 'public', '404.html')));
 
 module.exports = app;
