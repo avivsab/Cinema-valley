@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+a:visited {
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header {
+    text-transform: uppercase;
+    font-weight: bold;
+    background: lightseagreen;
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    padding: 50px;
+    margin-bottom: 20px;
+}
+
+.movie {
+    margin-bottom: 20px;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.movie img {
+    border: 1px solid #444;
+    border-radius: 1px;
+}
+
+.movie:nth-child(odd) {
+    background: #eee;
+}
+
+.movie:nth-child(even) {
+    background: #000;
+    color: #fff;
+}
+
+.movie .genre {
+    float: right;
+    font-size: 12px;
+}
+
+.movie .buy-ticket-button {
+    bottom: 0;
+}
+
+.movie .description {
+    display: none;
+}
+
+.filters {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.notification {
+    color: #fff;
+    z-index: 5;
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    font-weight: bold;
+    background: #78e08e;
+    left: 0;
+    right: 0;
+    padding: 20px;
+}

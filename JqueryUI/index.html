@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"/>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="movies.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+<header>
+    Welcome to Cinema valley! 
+</header>
+<div>
+    <div class="filters">
+        <span>Genres: </span>
+        <button class="btn btn-sm btn-primary filter-btn">All</button>
+        <button class="btn btn-sm btn-primary filter-btn" data-filter="action">Action</button>
+        <button class="btn btn-sm btn-primary filter-btn" data-filter="comedy">Comedy</button>
+        <button class="btn btn-sm btn-primary filter-btn" data-filter="children">Children</button>
+    </div>
+    <div class="movie-list">
+    </div>
+</div>
+<div class="notification"></div>
+</body>
+</html>
