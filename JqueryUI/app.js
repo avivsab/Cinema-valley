@@ -16,7 +16,7 @@ $().ready(function () {
                         <div>                        
                         <p>
                             <span>Actors:</span>
-                            <span>${movie.actors.join(', ')}</span>
+                            <span><b>${movie.actors.join(', ')}</b></span>
                         </p>
                         <p>
                         <button class="btn btn-sm btn-danger description-button">Show/hide Description</button>

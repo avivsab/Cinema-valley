@@ -26,6 +26,10 @@ header {
     margin-bottom: 20px;
 }
 
+.d-lg-block{
+    padding: 5px;
+}
+
 .movie {
     margin-bottom: 20px;
     border-radius: 4px;
@@ -35,6 +39,12 @@ header {
 .movie img {
     border: 1px solid #444;
     border-radius: 1px;
+    
+}
+.movie img:hover{
+    outline: 1.5px solid #800067;
+    border: none;
+    opacity: 0.9;
 }
 
 .movie:nth-child(odd) {
